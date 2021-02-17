@@ -35,11 +35,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDownXY = new System.Windows.Forms.NumericUpDown();
             this.x = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCoords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXY)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridCoords
@@ -47,7 +51,8 @@
             this.dataGridCoords.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridCoords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.x,
-            this.y});
+            this.y,
+            this.Z});
             this.dataGridCoords.Location = new System.Drawing.Point(12, 42);
             this.dataGridCoords.Name = "dataGridCoords";
             this.dataGridCoords.RowHeadersWidth = 51;
@@ -126,6 +131,38 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Розмірність";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 354);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 17);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Розмірність";
+            // 
+            // numericUpDownXY
+            // 
+            this.numericUpDownXY.Location = new System.Drawing.Point(121, 352);
+            this.numericUpDownXY.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDownXY.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownXY.Name = "numericUpDownXY";
+            this.numericUpDownXY.Size = new System.Drawing.Size(85, 22);
+            this.numericUpDownXY.TabIndex = 8;
+            this.numericUpDownXY.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownXY.ValueChanged += new System.EventHandler(this.numericUpDownXY_ValueChanged);
+            // 
             // x
             // 
             this.x.HeaderText = "X";
@@ -140,11 +177,21 @@
             this.y.Name = "y";
             this.y.Width = 40;
             // 
+            // Z
+            // 
+            this.Z.HeaderText = "Z";
+            this.Z.MinimumWidth = 6;
+            this.Z.Name = "Z";
+            this.Z.Visible = false;
+            this.Z.Width = 40;
+            // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.numericUpDownXY);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.button1);
@@ -157,6 +204,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCoords)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMatrix)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXY)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,7 +219,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDownXY;
         private System.Windows.Forms.DataGridViewTextBoxColumn x;
         private System.Windows.Forms.DataGridViewTextBoxColumn y;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Z;
     }
 }

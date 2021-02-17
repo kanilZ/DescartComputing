@@ -31,6 +31,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.picturePlot = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.Clear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePlot)).BeginInit();
             this.SuspendLayout();
@@ -42,7 +44,7 @@
             this.inputToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -65,11 +67,34 @@
             this.picturePlot.TabStop = false;
             this.picturePlot.Paint += new System.Windows.Forms.PaintEventHandler(this.picturePlot_Paint);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(100, 31);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(225, 25);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Draw";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Clear
+            // 
+            this.Clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Clear.Location = new System.Drawing.Point(442, 31);
+            this.Clear.Name = "Clear";
+            this.Clear.Size = new System.Drawing.Size(225, 25);
+            this.Clear.TabIndex = 4;
+            this.Clear.Text = "Clear";
+            this.Clear.UseVisualStyleBackColor = true;
+            this.Clear.Click += new System.EventHandler(this.Clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 467);
+            this.Controls.Add(this.Clear);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.picturePlot);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -88,6 +113,8 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem inputToolStripMenuItem;
         private System.Windows.Forms.PictureBox picturePlot;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Clear;
     }
 }
 

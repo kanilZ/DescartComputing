@@ -13,14 +13,16 @@ namespace DescartComputing
 {
     public partial class Form1 : Form
     {
+        Graphics gs;
         Input form;
         private float[,] coords;
         private float[,] matrix;
+        private float[,] result;
         private Matrix Transform = null, InverseTransform = null;
-       // Graphics gs;
-        Pen p1 = new Pen(Color.Black);
         private const float DrawingScale = 25;
         private float Wxmin, Wxmax, Wymin, Wymax;
+        Pen p1 = new Pen(Color.Black, 3);
+
 
         private void Form1_Resize(object sender, EventArgs e)
         {
@@ -33,8 +35,17 @@ namespace DescartComputing
             InitializeComponent();
             form = new Input();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DrawLines(coords);
+            DrawLines(result);
+            //paint = true;
+            //  picturePlot_Paint(sender, (PaintEventArgs)e);
+        }
+
         private void CreateTransforms()
-        {          
+        {
             Transform = new Matrix();
             Transform.Scale(DrawingScale, DrawingScale);
             float cx = picturePlot.ClientSize.Width / 2;
@@ -56,14 +67,58 @@ namespace DescartComputing
             form.ShowDialog();
             coords = form.Coords;
             matrix = form.Matrix;
-            MatrixComputing.Multiply(coords, matrix);
+            if (coords==null || matrix==null)            
+                return;
+            
+          //  MirrorCoords();
+            result = MatrixComputing.Multiply(coords, matrix);
 
         }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            gs = picturePlot.CreateGraphics();
+            gs.Clear(Color.White);
+            picturePlot.Refresh();
+        }
+
+
         private void DrawLine()
         {
+            float x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width), y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height),
+           x2 = ScaleCoords(result[0, 0], picturePlot.ClientSize.Width), y2 = ScaleCoords(result[0, 1], picturePlot.ClientSize.Height);
+            gs.DrawLine(p1, x1, y1, x2, y2);
+        }
+        private void DrawLines(float[,] coords)
+        {
+            gs = picturePlot.CreateGraphics();
+            float x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width), y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height),
+            x2 = ScaleCoords(coords[coords.GetLength(0) - 1, 0], picturePlot.ClientSize.Width), y2 = ScaleCoords(coords[coords.GetLength(0) - 1, 1], picturePlot.ClientSize.Height);
+            gs.DrawLine(p1, x1, y1, x2, y2);
 
+            for (int i = 0; i < coords.GetLength(0) - 1; i++)
+            {
+                x1 = ScaleCoords(coords[i, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(coords[i, 1], picturePlot.ClientSize.Height);
+                x2 = ScaleCoords(coords[i + 1, 0], picturePlot.ClientSize.Width); y2 = ScaleCoords(coords[i + 1, 1], picturePlot.ClientSize.Height);
+
+                gs.DrawLine(p1, x1, y1, x2, y2);
+            }
+        }
+        private void MirrorCoords()
+        {
+            float[,] mirrorMask = { { 1, 0 }, { 0, -1 } };
+            coords = MatrixComputing.Multiply(coords, mirrorMask);
+        }
+        private float ScaleCoords(float coord, int clientSize)
+        {
+            return coord * DrawingScale + clientSize / 2;
         }
         private void picturePlot_Paint(object sender, PaintEventArgs e)
+        {
+            DrawAxis(sender, e);
+        }
+
+        private void DrawAxis(object sender, PaintEventArgs e)
         {
             if (Transform == null) CreateTransforms();
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -77,8 +132,6 @@ namespace DescartComputing
             e.Graphics.DrawLine(thin_pen, 0, Wymin, 0, Wymax);
             for (int y = (int)Wymin; y <= Wymax; y++)
                 e.Graphics.DrawLine(thin_pen, -tic, y, tic, y);
-
-           // e.Graphics.DrawLine(thin_pen, coords[0,0], coords[0,1], coords[1,0], coords[1,1]);
         }
     }
 }

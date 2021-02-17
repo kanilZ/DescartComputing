@@ -15,7 +15,7 @@ namespace DescartComputing
     {
         public float[,] Coords { get; private set; }
         public float[,] Matrix { get; private set; }
-       
+
         public Input()
         {
             InitializeComponent();
@@ -24,20 +24,34 @@ namespace DescartComputing
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Coords = FormArray(dataGridCoords.Rows.Count-1, dataGridCoords.Columns.Count, dataGridCoords);
-            Matrix = FormArray(dataGridMatrix.Rows.Count-1, dataGridMatrix.Columns.Count, dataGridMatrix);
+            int colm = dataGridCoords.Columns.Count;
+            if (numericUpDownXY.Value == 2)
+            {
+                colm = dataGridCoords.Columns.Count - 1;
+            }
+
+            Coords = FormArray(dataGridCoords.Rows.Count - 1, colm, dataGridCoords);
+            Matrix = FormArray(dataGridMatrix.Rows.Count - 1, dataGridMatrix.Columns.Count, dataGridMatrix);
             Close();
         }
         private float[,] FormArray(int row, int colm, DataGridView dataGrid)
         {
-        
+
+
             float[,] res = new float[row, colm];
-            for (int i = 0; i < row; i++)
+            try
             {
-                for (int j = 0; j < colm; j++)
+                for (int i = 0; i < row; i++)
                 {
-                    res[i, j] = Convert.ToInt32(dataGrid.Rows[i].Cells[j].Value);
+                    for (int j = 0; j < colm; j++)
+                    {
+                        res[i, j] = Convert.ToInt32(dataGrid.Rows[i].Cells[j].Value);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return null;
             }
             return res;
         }
@@ -60,6 +74,17 @@ namespace DescartComputing
 
         }
 
+        private void numericUpDownXY_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownXY.Value == 2)
+            {
+                dataGridCoords.Columns["Z"].Visible = false;
 
+            }
+            else if (numericUpDownXY.Value == 3)
+            {
+                dataGridCoords.Columns["Z"].Visible = true;
+            }
+        }
     }
 }
