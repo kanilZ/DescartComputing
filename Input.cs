@@ -13,31 +13,52 @@ namespace DescartComputing
 {
     public partial class Input : Form
     {
-        public float[,] Coords { get; private set; }
+        public List<float[,]> Coords { get; private set; } 
         public float[,] Matrix { get; private set; }
 
         public Input()
         {
             InitializeComponent();
             ChangeMask();
+            InitDataGrid();
         }
+        private void InitDataGrid()
+        {
+            dataGridCoords.Rows.Add();
+            dataGridCoords.Rows.Add();
+            dataGridCoords.Rows.Add();
+            dataGridCoords.Rows[0].Cells[0].Value = "1";
+            dataGridCoords.Rows[0].Cells[1].Value = "1";
+            dataGridCoords.Rows[1].Cells[0].Value = "3";
+            dataGridCoords.Rows[1].Cells[1].Value = "1";
+            dataGridCoords.Rows[2].Cells[0].Value = "1";
+            dataGridCoords.Rows[2].Cells[1].Value = "3";
 
+            dataGridMatrix.Rows.Add();
+            dataGridMatrix.Rows.Add();
+            dataGridMatrix.Rows[0].Cells[0].Value = "3";
+            dataGridMatrix.Rows[0].Cells[1].Value = "0";
+            dataGridMatrix.Rows[1].Cells[0].Value = "0";
+            dataGridMatrix.Rows[1].Cells[1].Value = "3";
+        }
         private void button1_Click(object sender, EventArgs e)
         {
+            Coords = new List<float[,]>(); 
             int colm = dataGridCoords.Columns.Count;
             if (numericUpDownXY.Value == 2)
             {
                 colm = dataGridCoords.Columns.Count - 1;
             }
 
-            Coords = FormArray(dataGridCoords.Rows.Count - 1, colm, dataGridCoords);
+            Coords.Add(FormArray(dataGridCoords.Rows.Count - 1, colm, dataGridCoords));
             Matrix = FormArray(dataGridMatrix.Rows.Count - 1, dataGridMatrix.Columns.Count, dataGridMatrix);
             Close();
         }
+
         private float[,] FormArray(int row, int colm, DataGridView dataGrid)
         {
-
-
+            int newrow = row;
+            int it = 0;
             float[,] res = new float[row, colm];
             try
             {
@@ -45,15 +66,44 @@ namespace DescartComputing
                 {
                     for (int j = 0; j < colm; j++)
                     {
-                        res[i, j] = Convert.ToInt32(dataGrid.Rows[i].Cells[j].Value);
+                        if (!float.TryParse((string)dataGrid.Rows[i].Cells[j].Value, out res[i, j]))
+                        {
+                            Coords.Add(RewriteArray(res, it, i, colm));
+                            it = i+1;
+                            break;
+                        }
+                      
                     }
                 }
+                res = RewriteArray(res, it, row, colm);
             }
             catch (Exception)
             {
                 return null;
             }
             return res;
+        }
+        T[,] RewriteArray<T>(T[,] original, int startRow, int endRow, int cols)
+        {
+            var newArray = new T[endRow - startRow, cols];
+            for (int i = startRow,k = 0; i < endRow; i++,k++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    newArray[k, j] = original[i, j];
+                }
+            }
+            return newArray;
+        }
+        T[,] ResizeArray<T>(T[,] original, int rows, int cols)
+        {
+            var newArray = new T[rows, cols];
+            int minRows = Math.Min(rows, original.GetLength(0));
+            int minCols = Math.Min(cols, original.GetLength(1));
+            for (int i = 0; i < minRows; i++)
+                for (int j = 0; j < minCols; j++)
+                    newArray[i, j] = original[i, j];
+            return newArray;
         }
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -69,10 +119,7 @@ namespace DescartComputing
                 dataGridMatrix.Columns[i].Width = 30;
             }
         }
-        private void dataGridCoords_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
 
         private void numericUpDownXY_ValueChanged(object sender, EventArgs e)
         {

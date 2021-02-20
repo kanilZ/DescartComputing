@@ -33,6 +33,7 @@
             this.picturePlot = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.Clear = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePlot)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,7 @@
             // inputToolStripMenuItem
             // 
             this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
-            this.inputToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
             this.inputToolStripMenuItem.Text = "Введення значень";
             this.inputToolStripMenuItem.Click += new System.EventHandler(this.inputToolStripMenuItem_Click);
             // 
@@ -88,11 +89,23 @@
             this.Clear.UseVisualStyleBackColor = true;
             this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(353, 31);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(67, 21);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "Mirror";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 467);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.picturePlot);
@@ -115,6 +128,7 @@
         private System.Windows.Forms.PictureBox picturePlot;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Clear;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

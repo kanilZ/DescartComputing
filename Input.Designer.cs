@@ -59,7 +59,7 @@
             this.dataGridCoords.RowTemplate.Height = 24;
             this.dataGridCoords.Size = new System.Drawing.Size(233, 303);
             this.dataGridCoords.TabIndex = 0;
-            this.dataGridCoords.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCoords_CellContentClick);
+         
             // 
             // dataGridMatrix
             // 

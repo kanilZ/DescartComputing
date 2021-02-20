@@ -15,9 +15,9 @@ namespace DescartComputing
     {
         Graphics gs;
         Input form;
-        private float[,] coords;
+        public List<float[,]> coords;
         private float[,] matrix;
-        private float[,] result;
+        public List<float[,]> result;
         private Matrix Transform = null, InverseTransform = null;
         private const float DrawingScale = 25;
         private float Wxmin, Wxmax, Wymin, Wymax;
@@ -38,10 +38,20 @@ namespace DescartComputing
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DrawLines(coords);
-            DrawLines(result);
-            //paint = true;
-            //  picturePlot_Paint(sender, (PaintEventArgs)e);
+            for (int i = 0; i < coords.Count; i++)
+            {
+                if (coords[i].Length == 2)
+                {
+                    DrawLine(coords[i], result[i]);
+                }
+                else
+                {
+                    DrawLines(coords[i]);
+                    DrawLines(result[i]);
+                }
+                
+            }
+
         }
 
         private void CreateTransforms()
@@ -67,10 +77,13 @@ namespace DescartComputing
             form.ShowDialog();
             coords = form.Coords;
             matrix = form.Matrix;
-            if (coords==null || matrix==null)            
+            if (coords == null || matrix == null)
                 return;
-            
-          //  MirrorCoords();
+
+            if (checkBox1.Checked)
+            {
+                MirrorCoords();
+            }
             result = MatrixComputing.Multiply(coords, matrix);
 
         }
@@ -83,7 +96,7 @@ namespace DescartComputing
         }
 
 
-        private void DrawLine()
+        private void DrawLine(float[,] coords, float[,] result)
         {
             float x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width), y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height),
            x2 = ScaleCoords(result[0, 0], picturePlot.ClientSize.Width), y2 = ScaleCoords(result[0, 1], picturePlot.ClientSize.Height);
@@ -91,9 +104,19 @@ namespace DescartComputing
         }
         private void DrawLines(float[,] coords)
         {
+            float x1, x2, y1, y2;
             gs = picturePlot.CreateGraphics();
-            float x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width), y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height),
-            x2 = ScaleCoords(coords[coords.GetLength(0) - 1, 0], picturePlot.ClientSize.Width), y2 = ScaleCoords(coords[coords.GetLength(0) - 1, 1], picturePlot.ClientSize.Height);
+
+            //if (item.Length == 2)
+            //{
+            //    x1 = ScaleCoords(item[0, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(item[0, 1], picturePlot.ClientSize.Height);
+            //    x2 = ScaleCoords(result.IndexOf(item), picturePlot.ClientSize.Width); y2 = ScaleCoords(result.IndexOf(item), picturePlot.ClientSize.Height); ;
+            //    gs.DrawLine(p1, x1, y1, x2, y2);
+            //    continue;
+            //}
+
+            x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height);
+            x2 = ScaleCoords(coords[coords.GetLength(0) - 1, 0], picturePlot.ClientSize.Width); y2 = ScaleCoords(coords[coords.GetLength(0) - 1, 1], picturePlot.ClientSize.Height);
             gs.DrawLine(p1, x1, y1, x2, y2);
 
             for (int i = 0; i < coords.GetLength(0) - 1; i++)
@@ -103,7 +126,11 @@ namespace DescartComputing
 
                 gs.DrawLine(p1, x1, y1, x2, y2);
             }
+
         }
+
+    
+
         private void MirrorCoords()
         {
             float[,] mirrorMask = { { 1, 0 }, { 0, -1 } };

@@ -8,26 +8,29 @@ namespace DescartComputing
 {
     public static class MatrixComputing
     {
-        public static float[,] Multiply(float[,] coords, float[,] matrix)
+        public static  List<float[,]> Multiply( List<float[,]> coords, float[,] matrix)
         {
-            float[,] res = new float[coords.GetLength(0),coords.GetLength(1)];
+            List<float[,]> res = new List<float[,]>();
+            foreach (var item in coords)
+            {
+                float[,] resarr = new float[item.GetLength(0), item.GetLength(1)];
 
-            if (coords.GetLength(1)!= matrix.GetLength(0))
-            {
-                return null;
-            }
-            for (int i = 0; i < coords.GetLength(0); i++)
-            {
-                for (int j = 0; j < matrix.GetLength(1); j++)
+                if (item.GetLength(1) != matrix.GetLength(0))
                 {
-                    for (int k = 0; k < coords.GetLength(1); k++)
-                    {                    
-                            res[i, j] += coords[i, k] * matrix[k, j];
+                    return null;
+                }
+                for (int i = 0; i < item.GetLength(0); i++)
+                {
+                    for (int j = 0; j < matrix.GetLength(1); j++)
+                    {
+                        for (int k = 0; k < item.GetLength(1); k++)
+                        {
+                            resarr[i, j] += item[i, k] * matrix[k, j];
+                        }
                     }
                 }
-               
+                res.Add(resarr);
             }
-            
             return res;
         }
     }
