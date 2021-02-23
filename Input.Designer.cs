@@ -40,6 +40,7 @@
             this.x = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.y = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCoords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -52,14 +53,14 @@
             this.dataGridCoords.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.x,
             this.y,
-            this.Z});
+            this.Z,
+            this.h});
             this.dataGridCoords.Location = new System.Drawing.Point(12, 42);
             this.dataGridCoords.Name = "dataGridCoords";
             this.dataGridCoords.RowHeadersWidth = 51;
             this.dataGridCoords.RowTemplate.Height = 24;
             this.dataGridCoords.Size = new System.Drawing.Size(233, 303);
             this.dataGridCoords.TabIndex = 0;
-         
             // 
             // dataGridMatrix
             // 
@@ -103,7 +104,7 @@
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(459, 352);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            3,
+            4,
             0,
             0,
             0});
@@ -144,7 +145,7 @@
             // 
             this.numericUpDownXY.Location = new System.Drawing.Point(121, 352);
             this.numericUpDownXY.Maximum = new decimal(new int[] {
-            3,
+            4,
             0,
             0,
             0});
@@ -185,6 +186,14 @@
             this.Z.Visible = false;
             this.Z.Width = 40;
             // 
+            // h
+            // 
+            this.h.HeaderText = "H";
+            this.h.MinimumWidth = 6;
+            this.h.Name = "h";
+            this.h.Visible = false;
+            this.h.Width = 40;
+            // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -224,5 +233,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn x;
         private System.Windows.Forms.DataGridViewTextBoxColumn y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
+        private System.Windows.Forms.DataGridViewTextBoxColumn h;
     }
 }

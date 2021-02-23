@@ -34,6 +34,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.Clear = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button3d = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePlot)).BeginInit();
             this.SuspendLayout();
@@ -45,14 +46,14 @@
             this.inputToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // inputToolStripMenuItem
             // 
             this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
-            this.inputToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
             this.inputToolStripMenuItem.Text = "Введення значень";
             this.inputToolStripMenuItem.Click += new System.EventHandler(this.inputToolStripMenuItem_Click);
             // 
@@ -81,7 +82,7 @@
             // Clear
             // 
             this.Clear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Clear.Location = new System.Drawing.Point(442, 31);
+            this.Clear.Location = new System.Drawing.Point(501, 31);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(225, 25);
             this.Clear.TabIndex = 4;
@@ -100,11 +101,22 @@
             this.checkBox1.Text = "Mirror";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // button3d
+            // 
+            this.button3d.Location = new System.Drawing.Point(12, 31);
+            this.button3d.Name = "button3d";
+            this.button3d.Size = new System.Drawing.Size(75, 23);
+            this.button3d.TabIndex = 7;
+            this.button3d.Text = "3d";
+            this.button3d.UseVisualStyleBackColor = true;
+            this.button3d.Click += new System.EventHandler(this.button3d_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 467);
+            this.Controls.Add(this.button3d);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.button1);
@@ -129,6 +141,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button3d;
     }
 }
 

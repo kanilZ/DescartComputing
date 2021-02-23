@@ -13,7 +13,7 @@ namespace DescartComputing
 {
     public partial class Input : Form
     {
-        public List<float[,]> Coords { get; private set; } 
+        public List<float[,]> Coords { get; private set; }
         public float[,] Matrix { get; private set; }
 
         public Input()
@@ -43,13 +43,8 @@ namespace DescartComputing
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Coords = new List<float[,]>(); 
-            int colm = dataGridCoords.Columns.Count;
-            if (numericUpDownXY.Value == 2)
-            {
-                colm = dataGridCoords.Columns.Count - 1;
-            }
-
+            Coords = new List<float[,]>();
+            int colm = (int)numericUpDownXY.Value;
             Coords.Add(FormArray(dataGridCoords.Rows.Count - 1, colm, dataGridCoords));
             Matrix = FormArray(dataGridMatrix.Rows.Count - 1, dataGridMatrix.Columns.Count, dataGridMatrix);
             Close();
@@ -57,7 +52,6 @@ namespace DescartComputing
 
         private float[,] FormArray(int row, int colm, DataGridView dataGrid)
         {
-            int newrow = row;
             int it = 0;
             float[,] res = new float[row, colm];
             try
@@ -69,10 +63,10 @@ namespace DescartComputing
                         if (!float.TryParse((string)dataGrid.Rows[i].Cells[j].Value, out res[i, j]))
                         {
                             Coords.Add(RewriteArray(res, it, i, colm));
-                            it = i+1;
+                            it = i + 1;
                             break;
                         }
-                      
+
                     }
                 }
                 res = RewriteArray(res, it, row, colm);
@@ -86,7 +80,7 @@ namespace DescartComputing
         T[,] RewriteArray<T>(T[,] original, int startRow, int endRow, int cols)
         {
             var newArray = new T[endRow - startRow, cols];
-            for (int i = startRow,k = 0; i < endRow; i++,k++)
+            for (int i = startRow, k = 0; i < endRow; i++, k++)
             {
                 for (int j = 0; j < cols; j++)
                 {
@@ -126,11 +120,17 @@ namespace DescartComputing
             if (numericUpDownXY.Value == 2)
             {
                 dataGridCoords.Columns["Z"].Visible = false;
+                dataGridCoords.Columns["H"].Visible = false;
 
             }
             else if (numericUpDownXY.Value == 3)
             {
                 dataGridCoords.Columns["Z"].Visible = true;
+                dataGridCoords.Columns["H"].Visible = false;
+            }
+            else
+            {
+                dataGridCoords.Columns["H"].Visible = true;
             }
         }
     }
