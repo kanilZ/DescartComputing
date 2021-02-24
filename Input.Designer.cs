@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.dataGridCoords = new System.Windows.Forms.DataGridView();
+            this.x = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridMatrix = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,10 +41,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDownXY = new System.Windows.Forms.NumericUpDown();
-            this.x = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.h = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCoords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -59,17 +59,47 @@
             this.dataGridCoords.Name = "dataGridCoords";
             this.dataGridCoords.RowHeadersWidth = 51;
             this.dataGridCoords.RowTemplate.Height = 24;
-            this.dataGridCoords.Size = new System.Drawing.Size(233, 303);
+            this.dataGridCoords.Size = new System.Drawing.Size(312, 303);
             this.dataGridCoords.TabIndex = 0;
+            // 
+            // x
+            // 
+            this.x.HeaderText = "X";
+            this.x.MinimumWidth = 6;
+            this.x.Name = "x";
+            this.x.Width = 40;
+            // 
+            // y
+            // 
+            this.y.HeaderText = "Y";
+            this.y.MinimumWidth = 6;
+            this.y.Name = "y";
+            this.y.Width = 40;
+            // 
+            // Z
+            // 
+            this.Z.HeaderText = "Z";
+            this.Z.MinimumWidth = 6;
+            this.Z.Name = "Z";
+            this.Z.Visible = false;
+            this.Z.Width = 40;
+            // 
+            // h
+            // 
+            this.h.HeaderText = "H";
+            this.h.MinimumWidth = 6;
+            this.h.Name = "h";
+            this.h.Visible = false;
+            this.h.Width = 40;
             // 
             // dataGridMatrix
             // 
             this.dataGridMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridMatrix.Location = new System.Drawing.Point(352, 42);
+            this.dataGridMatrix.Location = new System.Drawing.Point(459, 42);
             this.dataGridMatrix.Name = "dataGridMatrix";
             this.dataGridMatrix.RowHeadersWidth = 51;
             this.dataGridMatrix.RowTemplate.Height = 24;
-            this.dataGridMatrix.Size = new System.Drawing.Size(436, 303);
+            this.dataGridMatrix.Size = new System.Drawing.Size(329, 303);
             this.dataGridMatrix.TabIndex = 1;
             // 
             // label1
@@ -102,7 +132,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(459, 352);
+            this.numericUpDown1.Location = new System.Drawing.Point(566, 352);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             4,
             0,
@@ -126,7 +156,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(349, 354);
+            this.label3.Location = new System.Drawing.Point(456, 354);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 17);
             this.label3.TabIndex = 6;
@@ -163,36 +193,6 @@
             0,
             0});
             this.numericUpDownXY.ValueChanged += new System.EventHandler(this.numericUpDownXY_ValueChanged);
-            // 
-            // x
-            // 
-            this.x.HeaderText = "X";
-            this.x.MinimumWidth = 6;
-            this.x.Name = "x";
-            this.x.Width = 40;
-            // 
-            // y
-            // 
-            this.y.HeaderText = "Y";
-            this.y.MinimumWidth = 6;
-            this.y.Name = "y";
-            this.y.Width = 40;
-            // 
-            // Z
-            // 
-            this.Z.HeaderText = "Z";
-            this.Z.MinimumWidth = 6;
-            this.Z.Name = "Z";
-            this.Z.Visible = false;
-            this.Z.Width = 40;
-            // 
-            // h
-            // 
-            this.h.HeaderText = "H";
-            this.h.MinimumWidth = 6;
-            this.h.Name = "h";
-            this.h.Visible = false;
-            this.h.Width = 40;
             // 
             // Input
             // 

@@ -24,9 +24,35 @@ namespace DescartComputing
         }
         private void InitDataGrid()
         {
+            /* 
+             0	0	0	1
+             2	0	0	1
+             2	0	2	1
+             0	0	2	1
+             0	0	0	1
+             0	2	0	1
+             2	2	0	1
+             2	0	0	1
+             0	0	0	1
+             0	2	0	1
+             0	2	2	1
+             2	2	2	1
+             2	2	0	1
+             0	2	0	1
+             0	2	2	1
+             0	0	2	1
+             2	0	2	1
+             2	2	2	1
+             0	2	2	1
+
+            */
             dataGridCoords.Rows.Add();
             dataGridCoords.Rows.Add();
             dataGridCoords.Rows.Add();
+            dataGridCoords.Rows.Add();
+            dataGridCoords.Rows.Add();
+            dataGridCoords.Rows.Add();
+
             dataGridCoords.Rows[0].Cells[0].Value = "1";
             dataGridCoords.Rows[0].Cells[1].Value = "1";
             dataGridCoords.Rows[1].Cells[0].Value = "3";
