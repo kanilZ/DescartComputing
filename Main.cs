@@ -70,6 +70,11 @@ namespace DescartComputing
         }
         private void inputToolStripMenuItem_Click(object sender, EventArgs e)
         {
+         
+
+        }
+        private void OpenForm()
+        {
             form.ShowDialog();
             coords = form.Coords;
             matrix = form.Matrix;
@@ -80,7 +85,6 @@ namespace DescartComputing
             {
                 MirrorCoords();
             }
-            result = MatrixComputing.Multiply(coords, matrix);
 
         }
         private float[,] Make3D(float[,] coords)
@@ -102,6 +106,7 @@ namespace DescartComputing
 
         private void DrawLine(float[,] coords, float[,] result)
         {
+            gs = picturePlot.CreateGraphics();
             float x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width), y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height),
            x2 = ScaleCoords(result[0, 0], picturePlot.ClientSize.Width), y2 = ScaleCoords(result[0, 1], picturePlot.ClientSize.Height);
             gs.DrawLine(p1, x1, y1, x2, y2);
@@ -111,11 +116,14 @@ namespace DescartComputing
             float x1, x2, y1, y2;
             gs = picturePlot.CreateGraphics();
 
-            //x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height);
-            //x2 = ScaleCoords(coords[coords.GetLength(0) - 1, 0], picturePlot.ClientSize.Width); y2 = ScaleCoords(coords[coords.GetLength(0) - 1, 1], picturePlot.ClientSize.Height);
-            //gs.DrawLine(p1, x1, y1, x2, y2);
+            if (!checkBox3d.Checked)
+            {
+                x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height);
+                x2 = ScaleCoords(coords[coords.GetLength(0) - 1, 0], picturePlot.ClientSize.Width); y2 = ScaleCoords(coords[coords.GetLength(0) - 1, 1], picturePlot.ClientSize.Height);
+                gs.DrawLine(p1, x1, y1, x2, y2);
+            }
 
-            for (int i = 0; i < coords.GetLength(0) - 1; i++)
+            for (int i = 0; i < coords.GetLength(0)-1; i++)
             {
                 x1 = ScaleCoords(coords[i, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(coords[i, 1], picturePlot.ClientSize.Height);
                 x2 = ScaleCoords(coords[i + 1, 0], picturePlot.ClientSize.Width); y2 = ScaleCoords(coords[i + 1, 1], picturePlot.ClientSize.Height);
@@ -135,16 +143,39 @@ namespace DescartComputing
         {
             for (int i = 0; i < coords.Count; i++)
             {
-                if (coords[i].Length == 2)
+                if (coords[i].GetLength(0) == 1)
                 {
-                    DrawLine(coords[i], result[i]);
-                }
+                    DrawLine(Make3D(coords[i]), Make3D(result[i]));
+                }             
                 else
                 {
                     DrawLines(Make3D(coords[i]));
                     DrawLines(Make3D(result[i]));
                 }
             }
+        }
+
+        private void checkBox3d_CheckedChanged(object sender, EventArgs e)
+        {
+            picturePlot.Refresh();
+        }
+
+        private void matrixTransToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm();
+            result = MatrixComputing.Multiply(coords, matrix);
+        }
+
+        private void proectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm();
+            result = ProectionComputing.ComputeParallel(coords, form.Distance);
+        }
+
+        private void proectionKosoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm();
+            result = ProectionComputing.ComputeKoso(coords, form.Sin, form.Cos,form.Distance);
 
         }
 
@@ -176,6 +207,10 @@ namespace DescartComputing
             e.Graphics.DrawLine(thin_pen, 0, Wymin, 0, Wymax);
             for (int y = (int)Wymin; y <= Wymax; y++)
                 e.Graphics.DrawLine(thin_pen, -tic, y, tic, y);
+
+            if (!checkBox3d.Checked)
+                return;
+
 
             float zx1, zx2, zy1, zy2;
             float zd = (float)Math.Sqrt(2) * Wymin;

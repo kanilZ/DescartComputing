@@ -15,7 +15,9 @@ namespace DescartComputing
     {
         public List<float[,]> Coords { get; private set; }
         public float[,] Matrix { get; private set; }
-
+        public float Distance { get; private set; }
+        public float Sin { get; private set; }
+        public float Cos { get;private set; }
         public Input()
         {
             InitializeComponent();
@@ -49,9 +51,6 @@ namespace DescartComputing
             dataGridCoords.Rows.Add();
             dataGridCoords.Rows.Add();
             dataGridCoords.Rows.Add();
-            dataGridCoords.Rows.Add();
-            dataGridCoords.Rows.Add();
-            dataGridCoords.Rows.Add();
 
             dataGridCoords.Rows[0].Cells[0].Value = "1";
             dataGridCoords.Rows[0].Cells[1].Value = "1";
@@ -73,6 +72,9 @@ namespace DescartComputing
             int colm = (int)numericUpDownXY.Value;
             Coords.Add(FormArray(dataGridCoords.Rows.Count - 1, colm, dataGridCoords));
             Matrix = FormArray(dataGridMatrix.Rows.Count - 1, dataGridMatrix.Columns.Count, dataGridMatrix);
+            Distance = (float)Convert.ToDouble(textBoxDistance.Text);
+            Sin = (float)Math.Sin((Convert.ToDouble(textBoxSin.Text)*Math.PI)/180);
+            Cos  = (float)Math.Cos((Convert.ToDouble(textBoxSin.Text) * Math.PI) / 180);
             Close();
         }
 

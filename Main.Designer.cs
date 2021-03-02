@@ -35,6 +35,10 @@
             this.Clear = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button3d = new System.Windows.Forms.Button();
+            this.checkBox3d = new System.Windows.Forms.CheckBox();
+            this.matrixTransToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.proectionKosoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturePlot)).BeginInit();
             this.SuspendLayout();
@@ -46,14 +50,18 @@
             this.inputToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1000, 38);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // inputToolStripMenuItem
             // 
+            this.inputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.matrixTransToolStripMenuItem,
+            this.proectionToolStripMenuItem,
+            this.proectionKosoToolStripMenuItem});
             this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
-            this.inputToolStripMenuItem.Size = new System.Drawing.Size(151, 24);
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(151, 34);
             this.inputToolStripMenuItem.Text = "Введення значень";
             this.inputToolStripMenuItem.Click += new System.EventHandler(this.inputToolStripMenuItem_Click);
             // 
@@ -111,11 +119,45 @@
             this.button3d.UseVisualStyleBackColor = true;
             this.button3d.Click += new System.EventHandler(this.button3d_Click);
             // 
+            // checkBox3d
+            // 
+            this.checkBox3d.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.checkBox3d.AutoSize = true;
+            this.checkBox3d.Location = new System.Drawing.Point(427, 31);
+            this.checkBox3d.Name = "checkBox3d";
+            this.checkBox3d.Size = new System.Drawing.Size(46, 21);
+            this.checkBox3d.TabIndex = 8;
+            this.checkBox3d.Text = "3d";
+            this.checkBox3d.UseVisualStyleBackColor = true;
+            this.checkBox3d.CheckedChanged += new System.EventHandler(this.checkBox3d_CheckedChanged);
+            // 
+            // matrixTransToolStripMenuItem
+            // 
+            this.matrixTransToolStripMenuItem.Name = "matrixTransToolStripMenuItem";
+            this.matrixTransToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
+            this.matrixTransToolStripMenuItem.Text = "Матричні перетворення";
+            this.matrixTransToolStripMenuItem.Click += new System.EventHandler(this.matrixTransToolStripMenuItem_Click);
+            // 
+            // proectionToolStripMenuItem
+            // 
+            this.proectionToolStripMenuItem.Name = "proectionToolStripMenuItem";
+            this.proectionToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
+            this.proectionToolStripMenuItem.Text = "Проекція паралельна";
+            this.proectionToolStripMenuItem.Click += new System.EventHandler(this.proectionToolStripMenuItem_Click);
+            // 
+            // proectionKosoToolStripMenuItem
+            // 
+            this.proectionKosoToolStripMenuItem.Name = "proectionKosoToolStripMenuItem";
+            this.proectionKosoToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
+            this.proectionKosoToolStripMenuItem.Text = "Проекція косокутна";
+            this.proectionKosoToolStripMenuItem.Click += new System.EventHandler(this.proectionKosoToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 467);
+            this.Controls.Add(this.checkBox3d);
             this.Controls.Add(this.button3d);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.Clear);
@@ -142,6 +184,10 @@
         private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button3d;
+        private System.Windows.Forms.CheckBox checkBox3d;
+        private System.Windows.Forms.ToolStripMenuItem matrixTransToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem proectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem proectionKosoToolStripMenuItem;
     }
 }
 

@@ -41,6 +41,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.numericUpDownXY = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxDistance = new System.Windows.Forms.TextBox();
+            this.labelSin = new System.Windows.Forms.Label();
+            this.labelCos = new System.Windows.Forms.Label();
+            this.textBoxSin = new System.Windows.Forms.TextBox();
+            this.textBoxCos = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCoords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -95,11 +101,11 @@
             // dataGridMatrix
             // 
             this.dataGridMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridMatrix.Location = new System.Drawing.Point(459, 42);
+            this.dataGridMatrix.Location = new System.Drawing.Point(497, 42);
             this.dataGridMatrix.Name = "dataGridMatrix";
             this.dataGridMatrix.RowHeadersWidth = 51;
             this.dataGridMatrix.RowTemplate.Height = 24;
-            this.dataGridMatrix.Size = new System.Drawing.Size(329, 303);
+            this.dataGridMatrix.Size = new System.Drawing.Size(291, 303);
             this.dataGridMatrix.TabIndex = 1;
             // 
             // label1
@@ -132,7 +138,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(566, 352);
+            this.numericUpDown1.Location = new System.Drawing.Point(604, 352);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             4,
             0,
@@ -156,7 +162,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(456, 354);
+            this.label3.Location = new System.Drawing.Point(494, 354);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 17);
             this.label3.TabIndex = 6;
@@ -194,11 +200,68 @@
             0});
             this.numericUpDownXY.ValueChanged += new System.EventHandler(this.numericUpDownXY_ValueChanged);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(330, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 17);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Дистанція";
+            // 
+            // textBoxDistance
+            // 
+            this.textBoxDistance.Location = new System.Drawing.Point(409, 39);
+            this.textBoxDistance.Name = "textBoxDistance";
+            this.textBoxDistance.Size = new System.Drawing.Size(61, 22);
+            this.textBoxDistance.TabIndex = 10;
+            this.textBoxDistance.Text = "1";
+            // 
+            // labelSin
+            // 
+            this.labelSin.AutoSize = true;
+            this.labelSin.Location = new System.Drawing.Point(330, 73);
+            this.labelSin.Name = "labelSin";
+            this.labelSin.Size = new System.Drawing.Size(63, 17);
+            this.labelSin.TabIndex = 11;
+            this.labelSin.Text = "Sin (кут)";
+            // 
+            // labelCos
+            // 
+            this.labelCos.AutoSize = true;
+            this.labelCos.Location = new System.Drawing.Point(330, 103);
+            this.labelCos.Name = "labelCos";
+            this.labelCos.Size = new System.Drawing.Size(67, 17);
+            this.labelCos.TabIndex = 12;
+            this.labelCos.Text = "Cos (кут)";
+            // 
+            // textBoxSin
+            // 
+            this.textBoxSin.Location = new System.Drawing.Point(409, 70);
+            this.textBoxSin.Name = "textBoxSin";
+            this.textBoxSin.Size = new System.Drawing.Size(61, 22);
+            this.textBoxSin.TabIndex = 13;
+            this.textBoxSin.Text = "0";
+            // 
+            // textBoxCos
+            // 
+            this.textBoxCos.Location = new System.Drawing.Point(409, 100);
+            this.textBoxCos.Name = "textBoxCos";
+            this.textBoxCos.Size = new System.Drawing.Size(61, 22);
+            this.textBoxCos.TabIndex = 14;
+            this.textBoxCos.Text = "0";
+            // 
             // Input
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxCos);
+            this.Controls.Add(this.textBoxSin);
+            this.Controls.Add(this.labelCos);
+            this.Controls.Add(this.labelSin);
+            this.Controls.Add(this.textBoxDistance);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.numericUpDownXY);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -234,5 +297,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.DataGridViewTextBoxColumn h;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxDistance;
+        private System.Windows.Forms.Label labelSin;
+        private System.Windows.Forms.Label labelCos;
+        private System.Windows.Forms.TextBox textBoxSin;
+        private System.Windows.Forms.TextBox textBoxCos;
     }
 }
