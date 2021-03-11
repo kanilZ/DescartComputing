@@ -16,7 +16,7 @@ namespace DescartComputing
         public List<float[,]> result;
 
         private Matrix Transform = null, InverseTransform = null;
-        private const float DrawingScale = 25;
+        public const float DrawingScale = 25;
         private float Wxmin, Wxmax, Wymin, Wymax;
 
         Pen p1 = new Pen(Color.Black, 3);
@@ -45,7 +45,7 @@ namespace DescartComputing
                 else
                 {
                     DrawLines(coords[i]);
-                    DrawLines(result[i]);
+                    //  DrawLines(result[i]);
                 }
             }
 
@@ -70,7 +70,7 @@ namespace DescartComputing
         }
         private void inputToolStripMenuItem_Click(object sender, EventArgs e)
         {
-         
+
 
         }
         private void OpenForm()
@@ -109,26 +109,32 @@ namespace DescartComputing
             gs = picturePlot.CreateGraphics();
             float x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width), y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height),
            x2 = ScaleCoords(result[0, 0], picturePlot.ClientSize.Width), y2 = ScaleCoords(result[0, 1], picturePlot.ClientSize.Height);
-            gs.DrawLine(p1, x1, y1, x2, y2);
+            // gs.DrawLine(p1, x1, y1, x2, y2);
+            // DigitalDifferencialAnalizer.BuildLine(x1, x2, y1, y2, gs);
+            Brezenhem.BuildLine(x1, x2, y1, y2, gs,picturePlot);
         }
         private void DrawLines(float[,] coords)
         {
             float x1, x2, y1, y2;
             gs = picturePlot.CreateGraphics();
 
-            if (!checkBox3d.Checked)
+            if (!checkBox3d.Checked && coords.GetLength(0) > 2)
             {
                 x1 = ScaleCoords(coords[0, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(coords[0, 1], picturePlot.ClientSize.Height);
                 x2 = ScaleCoords(coords[coords.GetLength(0) - 1, 0], picturePlot.ClientSize.Width); y2 = ScaleCoords(coords[coords.GetLength(0) - 1, 1], picturePlot.ClientSize.Height);
-                gs.DrawLine(p1, x1, y1, x2, y2);
+                //  gs.DrawLine(p1, x1, y1, x2, y2);
+              //  DigitalDifferencialAnalizer.BuildLine(x1, x2, y1, y2, gs);
+                Brezenhem.BuildLine(x1, x2, y1, y2, gs, picturePlot);
+
             }
 
-            for (int i = 0; i < coords.GetLength(0)-1; i++)
+            for (int i = 0; i < coords.GetLength(0) - 1; i++)
             {
-                x1 = ScaleCoords(coords[i, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(coords[i, 1], picturePlot.ClientSize.Height);
-                x2 = ScaleCoords(coords[i + 1, 0], picturePlot.ClientSize.Width); y2 = ScaleCoords(coords[i + 1, 1], picturePlot.ClientSize.Height);
-
-                gs.DrawLine(p1, x1, y1, x2, y2);
+                x1 = ScaleCoords(coords[i, 0], picturePlot.ClientSize.Width); y1 = ScaleCoords(-coords[i, 1], picturePlot.ClientSize.Height);
+                x2 = ScaleCoords(coords[i + 1, 0], picturePlot.ClientSize.Width); y2 = ScaleCoords(-coords[i + 1, 1], picturePlot.ClientSize.Height);
+                //  DigitalDifferencialAnalizer.BuildLine(x1, x2, y1, y2, gs);
+                // gs.DrawLine(p1, x1, y1, x2, y2);
+                Brezenhem.BuildLine(x1, x2, y1, y2, gs, picturePlot);
             }
 
         }
@@ -146,7 +152,7 @@ namespace DescartComputing
                 if (coords[i].GetLength(0) == 1)
                 {
                     DrawLine(Make3D(coords[i]), Make3D(result[i]));
-                }             
+                }
                 else
                 {
                     DrawLines(Make3D(coords[i]));
@@ -175,7 +181,7 @@ namespace DescartComputing
         private void proectionKosoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm();
-            result = ProectionComputing.ComputeKoso(coords, form.Sin, form.Cos,form.Distance);
+            result = ProectionComputing.ComputeKoso(coords, form.Sin, form.Cos, form.Distance);
 
         }
 
@@ -203,10 +209,16 @@ namespace DescartComputing
             thin_pen.Width = 2 / DrawingScale;
             e.Graphics.DrawLine(thin_pen, Wxmin, 0, Wxmax, 0);
             for (int x = (int)Wxmin; x <= Wxmax; x++)
+            {
                 e.Graphics.DrawLine(thin_pen, x, -tic, x, tic);
+                e.Graphics.DrawLine(new Pen(Color.Black, 0.025f), x, Wymin, x, Wymax);
+            }
             e.Graphics.DrawLine(thin_pen, 0, Wymin, 0, Wymax);
             for (int y = (int)Wymin; y <= Wymax; y++)
+            {
                 e.Graphics.DrawLine(thin_pen, -tic, y, tic, y);
+                e.Graphics.DrawLine(new Pen(Color.Black, 0.025f), Wxmin, y, Wxmax, y);
+            }
 
             if (!checkBox3d.Checked)
                 return;
